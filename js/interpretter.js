@@ -4,8 +4,8 @@
 */
 
 list_functions = [
- {name:"lire",type:0,function:Lire},
- {name:"ecrire",type:0,function:Ecrire},
+ {name:"lire",type:0,function:lire},
+ {name:"ecrire",type:0,function:ecrire},
 
  {name:"ord",type:0,function:ord},
  {name:"chr",type:0,function:chr},
