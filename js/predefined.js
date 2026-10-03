@@ -22,4 +22,11 @@ function ecrire(args)
 function lire(args)
 {
   output_inter.readOnly=false;
+  output_inter.addEventListener("keydown", function(event){
+    if (event.key==="Enter") {
+      output_inter.readOnly=true;
+      event.preventDefault();
+      output_inter.value+="\n";
+    }
+  },{once: true});
 }
