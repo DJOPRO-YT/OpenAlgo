@@ -2,6 +2,8 @@
  Open-source Algo Interpretter
  by Jasser Riahi
 */
+const input_inter = document.getElementById("input-inter");
+const output_inter = document.getElementById("output-inter");
 
 list_functions = [
  {name:"lire",type:0,function:lire},
@@ -22,12 +24,36 @@ list_functions = [
  {name:"majus",type:0,function:majus},
 ]
 
+/*functions ;; type=0 => predefined ;; type=1 => byuser*/
+
+function simplify(str_)
+{
+ str_ = str_.trim();
+ str_ = str_.toLowerCase();
+ str_=str_.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+ 
+ return str_;
+}
+
 function saveFunction(name_func, line)
 {
- 
+ list_functions.push({name:name_func, type:1, line_index:line});
 }
 
 function run(code)
 {
- 
+ const array_code = code.split("\n");
+ for (int i = 0; array_code.length > i;i++)
+ {
+  const line = simplify(array_code[i]).split(" ");
+  switch (line[0])
+  {
+   case "procedure":
+   case "fonction":
+    saveFunction(line[1], i);
+    break;
+   default:
+    
+  }
+}
 }
