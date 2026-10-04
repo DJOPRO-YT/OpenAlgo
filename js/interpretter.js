@@ -5,6 +5,18 @@
 const input_inter = document.getElementById("input-inter");
 const output_inter = document.getElementById("output-inter");
 
+const VarTypes = {
+  "-1": "Indefinie",
+  "0": "Entier",
+  "1": "Reel",
+  "2": "Booleen",
+  "3": "Chaine",
+  "4": "Caractere",
+  "5": "Enregistrement",
+  "6": "Tableau",
+  "7": "Matrice"
+};
+
 list_vars = []
 list_functions = [
  {name:"lire",type:0,function:lire},
@@ -32,6 +44,8 @@ function saveFunction(name_func, line)
  list_functions.push({name:name_func, type:1, line_index:line});
 }
 
+function loadFunction()
+
 function setVariable(name_var, value)
 {
  let ii = list_vars.find(aaa => aaa.name === name_var);
@@ -41,7 +55,7 @@ function setVariable(name_var, value)
  }
 }
 
-function addVariable(name_var, type)
+function newVariable(name_var, type)
 {
  let ii = list_vars.find(aaa => aaa.name === name_var);
  if (!ii && name_var && name_var.length > 0 && VarTypes[type])
@@ -50,7 +64,24 @@ function addVariable(name_var, type)
  }
 }
 
-
+function equ_result(line)
+{
+ const break_chrs = ["+","-","/","<",">","=", " ", "div","mod","<=",">="];
+ const spc_chrs = ["div","mod","<=",">=","+","-","/","<",">","="];
+ let ispar = true;
+ while (ispar)
+ {
+  let a = line.indexOf("(");
+  let b = line.indexOf(")");
+  if ( (a == 0 || (a > 0 && break_chrs.find(line[a-1]))) && b > -1 && a-b > 1) //ex: (1+1)
+  {
+   equ_result(line.slice(a+1,b-1));
+   line.splice(a,b);
+  }
+  else
+  {}
+ }
+}
 
 function simplify(str_)
 {
@@ -63,10 +94,44 @@ function simplify(str_)
 
 function run(code)
 {
+let algoname = "";
+
+let isdebut = false;
+let isfin = false
+let interrumpt = false;
 const array_code = code.split("\n");
- for (int i = 0; array_code.length > i;i++)
+
+for (int i = 0; array_code.length > i;i++)
  {
- &W
+  if (isfin) {break;}
+  let buff_ = "";
+  for (int it = 0;array_code[i].length > it;it++)
+  {
+   if( interrumpt ){interrumpt=false;break;}
+   buff_ = buff_ + array_code[i][it];
+
+   switch (buff_.toLowerCase())
+   {
+    case "algorithme":
+     algoname = array_code[i].slice(10)
+     interrumpt = true;
+     break;
+    case "debut":
+     isdebut = true;
+     interrumpt = true;
+     break;
+    case "fin":
+     isdebut = false;
+     interrumpt = true;
+     isfin = true;
+     error_display(0);
+     break;
+    default:
+     
+     break;
+   }
+  }
+ 
  }
 }
 
