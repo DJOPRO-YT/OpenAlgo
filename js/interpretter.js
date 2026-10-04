@@ -64,23 +64,33 @@ function newVariable(name_var, type)
  }
 }
 
-function equ_result(line)
+function equ_result(line, i_line)
 {
  const break_chrs = ["+","-","/","<",">","=", " ", "div","mod","<=",">="];
- const spc_chrs = ["div","mod","<=",">=","+","-","/","<",">","="];
- let ispar = true;
- while (ispar)
+ const spc_chrs = ["div","mod","<=",">=","+","-","/","<",">","=", "*"];
+
+ let last_result = {type:-1, value:""};
+ let final_result = {type:-1, value:""};
+ 
+ while (true)
  {
   let a = line.indexOf("(");
   let b = line.indexOf(")");
   if ( (a == 0 || (a > 0 && break_chrs.find(line[a-1]))) && b > -1 && a-b > 1) //ex: (1+1)
   {
-   equ_result(line.slice(a+1,b-1));
+   last_result = equ_result(line.slice(a+1,b-1));
    line.splice(a,b);
   }
+  else if((a > -1 && b == -1)) {custom_error("[ERR] Ligne "+i_line+": ')' attendue.")}
+  else if((b > -1 && a == -1) ) {custom_error("[ERR] Ligne "+i_line+": '(' attendue.")}
   else
-  {}
+  {break;}
  }
+
+ 
+
+ 
+ 
 }
 
 function simplify(str_)
