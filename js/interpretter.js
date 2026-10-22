@@ -102,6 +102,11 @@ function simplify(str_)
  return str_;
 }
 
+function RunCode()
+{
+ run(document.getElementById("mycode").value);
+}
+
 function run(code)
 {
 let algoname = "";
