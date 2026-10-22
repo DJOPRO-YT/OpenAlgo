@@ -44,7 +44,7 @@ function saveFunction(name_func, line)
  list_functions.push({name:name_func, type:1, line_index:line});
 }
 
-function loadFunction() {}
+//function loadFunction() {}
 
 function setVariable(name_var, value)
 {
