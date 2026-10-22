@@ -44,7 +44,7 @@ function saveFunction(name_func, line)
  list_functions.push({name:name_func, type:1, line_index:line});
 }
 
-function loadFunction()
+function loadFunction() {}
 
 function setVariable(name_var, value)
 {
@@ -104,7 +104,7 @@ function simplify(str_)
 
 function RunCode()
 {
- run(document.getElementById("input-inter").value);
+ run(input_inter.value);
 }
 
 function run(code)
