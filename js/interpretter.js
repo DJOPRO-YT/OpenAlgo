@@ -104,7 +104,7 @@ function simplify(str_)
 
 function RunCode()
 {
- run(document.getElementById("mycode").value);
+ run(document.getElementById("input-inter").value);
 }
 
 function run(code)
